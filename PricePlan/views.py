@@ -73,3 +73,21 @@ class PricePlanDetail(APIView):
             price_plan.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+class GetPriceByPlanId(APIView):
+    """
+    Retrieve a price plan by its ID.
+    """
+    def get_object(self, pk):
+        try:
+            return PricePlan.objects.get(pk=pk)
+        except PricePlan.DoesNotExist:
+            return None
+
+    def get(self, request, pk):
+        price_plan = self.get_object(pk)
+        if price_plan is not None:
+            serializer = PricePlanSerializer(price_plan)
+            price = serializer.data.get('price')
+            return Response(price)
+        return Response(status=status.HTTP_404_NOT_FOUND)
