@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'PricePlan',  # Custom app for price plans
     'Machine',  # Custom app for machines
+    'Enrollment',  # Custom app for enrollments
     'rest_framework',  # Django REST Framework for API support
     'corsheaders',  # CORS headers for cross-origin requests
 ]
